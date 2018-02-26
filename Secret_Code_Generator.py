@@ -7,12 +7,14 @@ import random
 global t
 global coded
 global ncoded
+global nrword
 global encode
 global randnum
 
 t = ''
 coded = ''
 ncoded = ''
+nrword = ''
 encode = ''
 randnum = random.randint(2,100)
     
@@ -22,8 +24,9 @@ def secret_code():
     global ncoded
     global randnum
     global encode
+    global nrword
     t = input('Enter a message to be encoded : ')
-    encode = input('Now enter how you would like your message to be encoded in. You may choose more than one. c = Cyper; r = letter rearrangement; m = morse code : ')
+    encode = input('Now enter how you would like your message to be encoded in. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
 
     for l in encode:
         if l == 'c':
@@ -72,7 +75,33 @@ def Cypher():
 # rearrangement
 def Rearrange():
     global t
+    global coded
+    global ncoded
+    global nrword
+    if len(ncoded) > 0:
+        coded = ncoded
+
+    t = t + ' '
     
+    word = ''
+    for c in t:
+        if c != ' ':
+            c = str(c)
+            word = word + (c)
+        else:
+            for l in word:
+                # https://stackoverflow.com/questions/306400/how-to-randomly-select-an-item-from-a-list
+                randletter = random.choice(word)
+                randletter = str(randletter)
+                nrword = nrword + randletter
+
+                # https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python
+                word = word.replace(randletter, "")
+                print(word)
+            nrword = nrword + ' '
+    print(nrword)
+                    
+                                          
 
 
 # morsecode
