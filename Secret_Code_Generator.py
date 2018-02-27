@@ -35,8 +35,6 @@ def secret_code():
                 print(coded)
             else:
                 Cypher()
-            print('Each letter was moved forwards by', randnum, 'spaces.')
-
         elif l == 'r':
             Rearrange()
         elif l == 'm':
@@ -47,6 +45,9 @@ def secret_code():
                 print(ncoded)
         else:
             print('invalid encoder')
+    if 'c' in encode:
+        print('Each letter was moved forwards by', randnum, 'spaces.')
+
 
 # Cypher
 def Cypher():
