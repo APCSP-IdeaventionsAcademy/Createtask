@@ -17,7 +17,7 @@ ncoded = ''
 nrword = ''
 encode = ''
 randnum = random.randint(2,100)
-    
+   
 def secret_code():
     global t
     global coded
@@ -86,19 +86,30 @@ def Rearrange():
     word = ''
     for c in t:
         if c != ' ':
+            word = str(word)
+            
+            word = word.replace("[","")
+            word = word.replace("]","")
+                
             c = str(c)
             word = word + (c)
         else:
-            for l in word:
+            for l in range(len(word)):
                 # https://stackoverflow.com/questions/306400/how-to-randomly-select-an-item-from-a-list
                 randletter = random.choice(word)
                 randletter = str(randletter)
+
+                word = list(word)
+                
                 nrword = nrword + randletter
 
                 # https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python
-                word = word.replace(randletter, "")
-                print(word)
+                letind = word.index(randletter)
+                
+                del word[letind]
             nrword = nrword + ' '
+
+    word = str(word)
     print(nrword)
                     
                                           
