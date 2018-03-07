@@ -13,6 +13,7 @@ global nrword
 global encode
 global randnum
 global mcoded
+global can_be_coded
 
 # https://stackoverflow.com/questions/16060899/alphabet-range-python
 alfbet = list(2*string.ascii_lowercase)
@@ -23,11 +24,52 @@ coded = ''
 nrword = ''
 encode = ''
 mcoded = ''
+can_be_coded = False
 
 randnum = random.randint(2,45)
 while randnum == 26:
     randnum = random.randint(2,45)
-   
+
+def Encode():
+    global encode
+    global can_be_coded
+    
+    can_be_coded = False   
+    while can_be_coded == False:
+        
+        encode = input('Please renter how you would like your message to be encoded in. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
+        encode = encode.lower()
+
+        if 'c' not in encode and 'r' not in encode and 'm' not in encode:
+            print(encode, 'is not an option')
+                    
+        elif len(encode) > 0 and 'm' in encode:
+            if 'c' in encode:
+                if encode.index('m') < encode.index('c'):
+                    print('Cannot cypher the message after it has been translated to morse code.')
+                elif 'r' in encode:
+                    if encode.index('m') < encode.index('r'):
+                        print('Cannot rearrange the message after it has been translated to morse code.')
+
+                elif len(encode) == 0:
+                    can_be_coded = False
+                    
+        elif 'c' in encode or 'r' in encode or 'm' in encode:
+            ch = 0
+            for c in encode:
+                if c not in alfbet:
+                    ch += 1
+                
+            if ch > 0:
+                print(encode, 'is not an option')
+            else:
+                can_be_encoded = True
+                
+        else:
+            can_be_encoded = True
+    
+
+# Main function            
 def secret_code():
     global t
     global coded
@@ -35,10 +77,13 @@ def secret_code():
     global encode
     global nrword
     global mcoded
+    global can_be_coded
     
     t = input('Enter a message to be encoded : ')
-    encode = input('Now enter how you would like your message to be encoded in. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
 
+    print('Now enter how you would like your message to be encoded in.')
+    Encode()
+    
     for l in encode:
         if l == 'c':
             Cypher()
@@ -52,8 +97,7 @@ def secret_code():
         elif l == 'm':
             Morsecode()
             print(mcoded)
-        else:
-            print('invalid encoder')
+        
     if 'c' in encode:
         print('Each letter was moved forwards by', randnum, 'spaces.')
 
