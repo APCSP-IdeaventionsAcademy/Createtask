@@ -38,9 +38,8 @@ def Start():
     play_again = 'y'
     can_be_coded = False
 
-    randnum = random.randint(2,45)
-    while randnum == 26:
-        randnum = random.randint(2,45)
+    randnum = random.randint(2,25)
+
 
 def Encode():
     global encode
@@ -49,7 +48,7 @@ def Encode():
     can_be_coded = False   
     while can_be_coded == False:
         
-        encode = input('Please renter how you would like your message to be encoded in. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
+        encode = input('Please re-enter how you would like your message to be encoded. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
         encode = encode.lower()
 
         if 'c' not in encode and 'r' not in encode and 'm' not in encode:
@@ -57,17 +56,20 @@ def Encode():
                 can_be_coded = False
             else:
                 print(encode, 'is not an option')
-                        
+                print('')
+                
         elif len(encode) > 0 and 'm' in encode:
             if 'c' in encode:
                 if encode.index('m') < encode.index('c'):
                     print('Cannot cypher the message after it has been translated to morse code.')  
+                    print('')
                 else:
                     can_be_coded = True
                         
             elif 'r' in encode:
                     if encode.index('m') < encode.index('r'):
                         print('Cannot rearrange the message after it has been translated to morse code.')
+                        print('')
                     else:
                         can_be_coded = True
             else:
@@ -83,6 +85,7 @@ def Encode():
 
             if ch > 0:
                 print(encode, 'is not an option')
+                print('')
             else:
                 can_be_coded = True
                 
@@ -102,7 +105,7 @@ def secret_code():
     
     t = input('Enter a message to be encoded : ')
 
-    print('Now enter how you would like your message to be encoded in.')
+    print('Now enter how you would like your message to be encoded.')
     Encode()
     
     for l in encode:
@@ -147,9 +150,8 @@ def Cypher():
             # https://stackoverflow.com/questions/43102861/finding-an-element-from-one-list-in-another-list-in-python
             i = alfbet.index(l)
                 
-            i = int(i) + 5
+            i = i + randnum
             c = alfbet[i]
-            c = str(c)
             coded = coded + (c)
 
 
@@ -201,7 +203,6 @@ def Rearrange():
     word = str(word)
                     
                                           
-
 # morsecode
 def Morsecode():
     global nrword
@@ -449,10 +450,11 @@ def Morsecode():
             else:
                 mcoded = mcoded + '? '
 
+
 def Replay():
     global play_again
 
-    while play_again == 'y':
+    while play_again != 'n':
         print('')
         play_again = input('Would you like to encode another message? (y or n) : ')
         play_again = play_again.lower()
