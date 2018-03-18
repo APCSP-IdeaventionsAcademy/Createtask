@@ -7,7 +7,7 @@ import random
 global alfbet
 global numbers
 
-# Cite referenced to import the alaphabet
+# Cite referenced to import the alphabet
 # https://stackoverflow.com/questions/16060899/alphabet-range-python
 alfbet = list(2*string.ascii_lowercase)
 numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
@@ -40,16 +40,15 @@ def Encode():
     can_be_coded = False   
     while can_be_coded == False:
         
-        encode = input('''Enter how you would like your message to be encoded.
-You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ''')
+        encode = input('''Enter how you would like your message to be encoded. You may choose more than one.
+c = cypher; r = letter rearrangement; m = morse code : ''')
         encode = encode.lower()
                 
         if 'c' in encode or 'r' in encode or 'm' in encode:
             ch = 0
             for c in encode:
                 if c not in alfbet:
-                    ch += 1
-                        
+                    ch += 1        
                 else:
                     if c == 'c' or c == 'r' or c == 'm':
                         ch = ch
@@ -59,7 +58,6 @@ You may choose more than one. c = Cypher; r = letter rearrangement; m = morse co
             if ch > 0:
                 print(encode, 'is not an option')
                 print('')
-                
             else:
                 if len(encode) > 0 and 'm' in encode:
                     if 'c' in encode:
@@ -78,8 +76,7 @@ You may choose more than one. c = Cypher; r = letter rearrangement; m = morse co
                     else:
                         can_be_coded = True
                 else:
-                    can_be_coded = True
-                
+                    can_be_coded = True     
         else:
             print(encode, 'is not an option')
             print('')
@@ -111,6 +108,7 @@ def secret_code():
             Rearrange()
             if 'm' not in encode:
                 print(nrword)
+                
         elif l == 'm':
             Morsecode()
             print(mcoded)
@@ -149,7 +147,6 @@ def Cypher():
             coded = coded + (c)
 
 
-# rearrangement
 def Rearrange():
     global t
     global coded
@@ -196,7 +193,6 @@ def Rearrange():
     word = str(word)
                     
                                           
-# morsecode
 def Morsecode():
     global nrword
     global coded
@@ -293,7 +289,7 @@ def Morsecode():
         elif l == '0':
             mcoded = mcoded + '----- '
         else:
-            mcoded = mcoded + '? '
+            mcoded = mcoded + ''
 
 
 def Replay():
