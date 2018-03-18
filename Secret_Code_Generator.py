@@ -1,4 +1,4 @@
-# Natalie
+# Natalie Gainer
 # Create task
 
 import string
@@ -40,7 +40,8 @@ def Encode():
     can_be_coded = False   
     while can_be_coded == False:
         
-        encode = input('Enter how you would like your message to be encoded. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
+        encode = input('''Enter how you would like your message to be encoded.
+You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ''')
         encode = encode.lower()
                 
         if 'c' in encode or 'r' in encode or 'm' in encode:
