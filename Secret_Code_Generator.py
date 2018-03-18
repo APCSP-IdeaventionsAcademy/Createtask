@@ -1,3 +1,5 @@
+# Debugging in process
+
 # Natalie
 # Create task
 
@@ -7,15 +9,7 @@ import random
 global alfbet
 global numbers
 
-global t
-global coded
-global nrword
-global encode
-global randnum
-global mcoded
-global play_again
-global can_be_coded
-
+# Cite referenced to import the alaphabet
 # https://stackoverflow.com/questions/16060899/alphabet-range-python
 alfbet = list(2*string.ascii_lowercase)
 numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
@@ -48,46 +42,44 @@ def Encode():
     can_be_coded = False   
     while can_be_coded == False:
         
-        encode = input('Please re-enter how you would like your message to be encoded. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
+        encode = input('Enter how you would like your message to be encoded. You may choose more than one. c = Cypher; r = letter rearrangement; m = morse code : ')
         encode = encode.lower()
-
-        if 'c' not in encode and 'r' not in encode and 'm' not in encode:
-            if len(encode) == 0:
-                can_be_coded = False
-            else:
-                print(encode, 'is not an option')
-                print('')
                 
-        elif len(encode) > 0 and 'm' in encode:
-            if 'c' in encode:
-                if encode.index('m') < encode.index('c'):
-                    print('Cannot cypher the message after it has been translated to morse code.')  
-                    print('')
-                else:
-                    can_be_coded = True
-                        
-            elif 'r' in encode:
-                    if encode.index('m') < encode.index('r'):
-                        print('Cannot rearrange the message after it has been translated to morse code.')
-                        print('')
-                    else:
-                        can_be_coded = True
-            else:
-                can_be_coded = True
-                
-        elif 'c' in encode or 'r' in encode or 'm' in encode:
+        if 'c' in encode or 'r' in encode or 'm' in encode:
             ch = 0
             for c in encode:
                 if c not in alfbet:
                     ch += 1
+                        
                 else:
-                    ch = ch
+                    if c == 'c' or c == 'r' or c == 'm':
+                        ch = ch
+                    else:
+                        ch += 1
 
             if ch > 0:
                 print(encode, 'is not an option')
                 print('')
+                
             else:
-                can_be_coded = True
+                if len(encode) > 0 and 'm' in encode:
+                    if 'c' in encode:
+                        if encode.index('m') < encode.index('c'):
+                            print('Cannot cypher the message after it has been translated to morse code.')  
+                            print('')
+                        else:
+                            can_be_coded = True
+                                
+                    elif 'r' in encode:
+                            if encode.index('m') < encode.index('r'):
+                                print('Cannot rearrange the message after it has been translated to morse code.')
+                                print('')
+                            else:
+                                can_be_coded = True
+                    else:
+                        can_be_coded = True
+                else:
+                    can_be_coded = True
                 
         else:
             can_be_coded = False
@@ -105,7 +97,6 @@ def secret_code():
     
     t = input('Enter a message to be encoded : ')
 
-    print('Now enter how you would like your message to be encoded.')
     Encode()
     
     for l in encode:
@@ -147,6 +138,7 @@ def Cypher():
         elif l not in alfbet and l not in numbers:
             coded = coded + l
         else:
+            # Cite referenced to find index of element
             # https://stackoverflow.com/questions/43102861/finding-an-element-from-one-list-in-another-list-in-python
             i = alfbet.index(l)
                 
@@ -215,241 +207,92 @@ def Morsecode():
     encode = encode.lower()
     t = t.lower()
     mcoded = mcoded.lower()
-    if len(nrword) > 0:
-        for l in nrword:
-            if l == ' ':
-                mcoded = mcoded + '  '
-            elif l == 'a':
-                mcoded = mcoded + '●- '
-            elif l == 'b':
-                mcoded = mcoded + '-●●● '
-            elif l == 'c':
-                mcoded = mcoded + '-●-● '
-            elif l == 'd':
-                mcoded = mcoded + '-●● '
-            elif l == 'e':
-                mcoded = mcoded + '● '
-            elif l == 'f':
-                mcoded = mcoded + '●●-● '
-            elif l == 'g':
-                mcoded = mcoded + '--● '
-            elif l == 'h':
-                mcoded = mcoded + '●●●● '
-            elif l == 'i':
-                mcoded = mcoded + '●● '
-            elif l == 'j':
-                mcoded = mcoded + '●--- '
-            elif l == 'k':
-                mcoded = mcoded + '-●- '
-            elif l == 'l':
-                mcoded = mcoded + '●-●● '
-            elif l == 'm':
-                mcoded = mcoded + '-- '
-            elif l == 'n':
-                mcoded = mcoded + '-● '
-            elif l == 'o':
-                mcoded = mcoded + '--- '
-            elif l == 'p':
-                mcoded = mcoded + '●--● '
-            elif l == 'q':
-                mcoded = mcoded + '--●- '
-            elif l == 'r':
-                mcoded = mcoded + '●-● '
-            elif l == 's':
-                mcoded = mcoded + '●●● '
-            elif l == 't':
-                mcoded = mcoded + '- '
-            elif l == 'u':
-                mcoded = mcoded + '●●- '
-            elif l == 'v':
-                mcoded = mcoded + '●●●- '
-            elif l == 'w':
-                mcoded = mcoded + '●-- '
-            elif l == 'x':
-                mcoded = mcoded + '-●●- '
-            elif l == 'y':
-                mcoded = mcoded + '-●-- '
-            elif l == 'z':
-                mcoded = mcoded + '--●● '
-            elif l == '1':
-                mcoded = mcoded + '●---- '
-            elif l == '2':
-                mcoded = mcoded + '●●--- '
-            elif l == '3':
-                mcoded = mcoded + '●●●-- '
-            elif l == '4':
-                mcoded = mcoded + '●●●●- '
-            elif l == '5':
-                mcoded = mcoded + '●●●●● '
-            elif l == '6':
-                mcoded = mcoded + '-●●●● '
-            elif l == '7':
-                mcoded = mcoded + '--●●● '
-            elif l == '8':
-                mcoded = mcoded + '---●● '
-            elif l == '9':
-                mcoded = mcoded + '----● '
-            elif l == '0':
-                mcoded = mcoded + '----- '
-            else:
-                mcoded = mcoded + '? '
-    elif len(encode) == 1:
-        for l in t:
-            if l == ' ':
-                mcoded = mcoded + '  '
-            elif l == 'a':
-                mcoded = mcoded + '●- '
-            elif l == 'b':
-                mcoded = mcoded + '-●●● '
-            elif l == 'c':
-                mcoded = mcoded + '-●-● '
-            elif l == 'd':
-                mcoded = mcoded + '-●● '
-            elif l == 'e':
-                mcoded = mcoded + '● '
-            elif l == 'f':
-                mcoded = mcoded + '●●-● '
-            elif l == 'g':
-                mcoded = mcoded + '--● '
-            elif l == 'h':
-                mcoded = mcoded + '●●●● '
-            elif l == 'i':
-                mcoded = mcoded + '●● '
-            elif l == 'j':
-                mcoded = mcoded + '●--- '
-            elif l == 'k':
-                mcoded = mcoded + '-●- '
-            elif l == 'l':
-                mcoded = mcoded + '●-●● '
-            elif l == 'm':
-                mcoded = mcoded + '-- '
-            elif l == 'n':
-                mcoded = mcoded + '-● '
-            elif l == 'o':
-                mcoded = mcoded + '--- '
-            elif l == 'p':
-                mcoded = mcoded + '●--● '
-            elif l == 'q':
-                mcoded = mcoded + '--●- '
-            elif l == 'r':
-                mcoded = mcoded + '●-● '
-            elif l == 's':
-                mcoded = mcoded + '●●● '
-            elif l == 't':
-                mcoded = mcoded + '- '
-            elif l == 'u':
-                mcoded = mcoded + '●●- '
-            elif l == 'v':
-                mcoded = mcoded + '●●●- '
-            elif l == 'w':
-                mcoded = mcoded + '●-- '
-            elif l == 'x':
-                mcoded = mcoded + '-●●- '
-            elif l == 'y':
-                mcoded = mcoded + '-●-- '
-            elif l == 'z':
-                mcoded = mcoded + '--●● '
-            elif l == '1':
-                mcoded = mcoded + '●---- '
-            elif l == '2':
-                mcoded = mcoded + '●●--- '
-            elif l == '3':
-                mcoded = mcoded + '●●●-- '
-            elif l == '4':
-                mcoded = mcoded + '●●●●- '
-            elif l == '5':
-                mcoded = mcoded + '●●●●● '
-            elif l == '6':
-                mcoded = mcoded + '-●●●● '
-            elif l == '7':
-                mcoded = mcoded + '--●●● '
-            elif l == '8':
-                mcoded = mcoded + '---●● '
-            elif l == '9':
-                mcoded = mcoded + '----● '
-            elif l == '0':
-                mcoded = mcoded + '----- '
-            else:
-                mcoded = mcoded + '? '
-    else:
-        for l in coded:
-            if l == ' ':
-                mcoded = mcoded + '  '
-            elif l == 'a':
-                mcoded = mcoded + '●- '
-            elif l == 'b':
-                mcoded = mcoded + '-●●● '
-            elif l == 'c':
-                mcoded = mcoded + '-●-● '
-            elif l == 'd':
-                mcoded = mcoded + '-●● '
-            elif l == 'e':
-                mcoded = mcoded + '● '
-            elif l == 'f':
-                mcoded = mcoded + '●●-● '
-            elif l == 'g':
-                mcoded = mcoded + '--● '
-            elif l == 'h':
-                mcoded = mcoded + '●●●● '
-            elif l == 'i':
-                mcoded = mcoded + '●● '
-            elif l == 'j':
-                mcoded = mcoded + '●--- '
-            elif l == 'k':
-                mcoded = mcoded + '-●- '
-            elif l == 'l':
-                mcoded = mcoded + '●-●● '
-            elif l == 'm':
-                mcoded = mcoded + '-- '
-            elif l == 'n':
-                mcoded = mcoded + '-● '
-            elif l == 'o':
-                mcoded = mcoded + '--- '
-            elif l == 'p':
-                mcoded = mcoded + '●--● '
-            elif l == 'q':
-                mcoded = mcoded + '--●- '
-            elif l == 'r':
-                mcoded = mcoded + '●-● '
-            elif l == 's':
-                mcoded = mcoded + '●●● '
-            elif l == 't':
-                mcoded = mcoded + '- '
-            elif l == 'u':
-                mcoded = mcoded + '●●- '
-            elif l == 'v':
-                mcoded = mcoded + '●●●- '
-            elif l == 'w':
-                mcoded = mcoded + '●-- '
-            elif l == 'x':
-                mcoded = mcoded + '-●●- '
-            elif l == 'y':
-                mcoded = mcoded + '-●-- '
-            elif l == 'z':
-                mcoded = mcoded + '--●● '
-            elif l == '1':
-                mcoded = mcoded + '●---- '
-            elif l == '2':
-                mcoded = mcoded + '●●--- '
-            elif l == '3':
-                mcoded = mcoded + '●●●-- '
-            elif l == '4':
-                mcoded = mcoded + '●●●●- '
-            elif l == '5':
-                mcoded = mcoded + '●●●●● '
-            elif l == '6':
-                mcoded = mcoded + '-●●●● '
-            elif l == '7':
-                mcoded = mcoded + '--●●● '
-            elif l == '8':
-                mcoded = mcoded + '---●● '
-            elif l == '9':
-                mcoded = mcoded + '----● '
-            elif l == '0':
-                mcoded = mcoded + '----- '
-            else:
-                mcoded = mcoded + '? '
 
+    iterm = ''
+    if len(nrword) > 0:
+        iterm = nrword
+    elif len(encode) == 1:
+        iterm = t
+    else:
+        iterm = coded
+  
+    for l in iterm:
+        if l == ' ':
+            mcoded = mcoded + '  '
+        elif l == 'a':
+            mcoded = mcoded + '●- '
+        elif l == 'b':
+            mcoded = mcoded + '-●●● '
+        elif l == 'c':
+            mcoded = mcoded + '-●-● '
+        elif l == 'd':
+            mcoded = mcoded + '-●● '
+        elif l == 'e':
+            mcoded = mcoded + '● '
+        elif l == 'f':
+            mcoded = mcoded + '●●-● '
+        elif l == 'g':
+            mcoded = mcoded + '--● '
+        elif l == 'h':
+            mcoded = mcoded + '●●●● '
+        elif l == 'i':
+            mcoded = mcoded + '●● '
+        elif l == 'j':
+            mcoded = mcoded + '●--- '
+        elif l == 'k':
+            mcoded = mcoded + '-●- '
+        elif l == 'l':
+            mcoded = mcoded + '●-●● '
+        elif l == 'm':
+            mcoded = mcoded + '-- '
+        elif l == 'n':
+            mcoded = mcoded + '-● '
+        elif l == 'o':
+            mcoded = mcoded + '--- '
+        elif l == 'p':
+            mcoded = mcoded + '●--● '
+        elif l == 'q':
+            mcoded = mcoded + '--●- '
+        elif l == 'r':
+            mcoded = mcoded + '●-● '
+        elif l == 's':
+            mcoded = mcoded + '●●● '
+        elif l == 't':
+            mcoded = mcoded + '- '
+        elif l == 'u':
+            mcoded = mcoded + '●●- '
+        elif l == 'v':
+            mcoded = mcoded + '●●●- '
+        elif l == 'w':
+            mcoded = mcoded + '●-- '
+        elif l == 'x':
+            mcoded = mcoded + '-●●- '
+        elif l == 'y':
+            mcoded = mcoded + '-●-- '
+        elif l == 'z':
+            mcoded = mcoded + '--●● '
+        elif l == '1':
+            mcoded = mcoded + '●---- '
+        elif l == '2':
+            mcoded = mcoded + '●●--- '
+        elif l == '3':
+            mcoded = mcoded + '●●●-- '
+        elif l == '4':
+            mcoded = mcoded + '●●●●- '
+        elif l == '5':
+            mcoded = mcoded + '●●●●● '
+        elif l == '6':
+            mcoded = mcoded + '-●●●● '
+        elif l == '7':
+            mcoded = mcoded + '--●●● '
+        elif l == '8':
+            mcoded = mcoded + '---●● '
+        elif l == '9':
+            mcoded = mcoded + '----● '
+        elif l == '0':
+            mcoded = mcoded + '----- '
+        else:
+            mcoded = mcoded + '? '
 
 def Replay():
     global play_again
