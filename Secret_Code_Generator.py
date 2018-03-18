@@ -82,6 +82,9 @@ def Encode():
                     can_be_coded = True
                 
         else:
+            print(encode, 'is not an option')
+            print('')
+            
             can_be_coded = False
     
 
@@ -175,18 +178,17 @@ def Rearrange():
                 c = ''
         else:
             for l in range(len(word)):
+                
+                # Cite referenced to choose random character from string 
                 # https://stackoverflow.com/questions/306400/how-to-randomly-select-an-item-from-a-list
                 randletter = random.choice(word)
                 randletter = str(randletter)
 
                 word = list(word)
-                
                 nrword = nrword + randletter
-
-                # https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python
                 letind = word.index(randletter)
-                
                 del word[letind]
+                
             nrword = nrword + ' '
         if nrword == t:
             nrword = ''
@@ -293,6 +295,7 @@ def Morsecode():
             mcoded = mcoded + '----- '
         else:
             mcoded = mcoded + '? '
+
 
 def Replay():
     global play_again
