@@ -1,5 +1,3 @@
-# Debugging in process
-
 # Natalie
 # Create task
 
